@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 22, 2018 11:18:22 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="hibernatedealte.Phone" table="phone" catalog="hibernateexample" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="employee" class="hibernatedealte.Employee" fetch="select">
+            <column name="employee_id" />
+        </many-to-one>
+        <property name="phoneNumber" type="string">
+            <column name="phone_number" length="12" />
+        </property>
+    </class>
+</hibernate-mapping>

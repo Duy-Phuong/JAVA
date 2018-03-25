@@ -24,8 +24,9 @@ public class HelloJava {
  
         // Gán giá trị cho firstNumber
         firstNumber = 10;
- 
+        
         System.out.println("First Number =" + firstNumber);
+                
  
         // Khai báo một biến kiểu float (Số thực 32 bit)
         // Số này được gán giá trị 10.2

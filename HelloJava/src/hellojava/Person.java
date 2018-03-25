@@ -10,6 +10,10 @@ package hellojava;
  * @author admin1
  */
 public class Person {
+
+    public void setName(String name) {
+        this.name = name;
+    }
        // Đây là một trường (Field).
     // Lưu trữ tên người.
     public String name;
