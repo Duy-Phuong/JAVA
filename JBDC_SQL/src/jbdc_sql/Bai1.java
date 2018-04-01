@@ -19,14 +19,15 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 public class Bai1 extends javax.swing.JFrame {
-
-      private static String DB_URL = "jdbc:sqlserver://localhost:1189;"
-            + "databaseName=QLSV1;"
-            + "integratedSecurity=true";
-    private static String USER_NAME = "sa";
-    private static String PASSWORD = "1234";
+    //mặc định
+      private static String DB_URL;// = "jdbc:sqlserver://localhost:1189;"
+           // + "databaseName=QLSV1;"
+          //  + "integratedSecurity=true";
+    private static String USER_NAME;// = "sa";
+    private static String PASSWORD;// = "1234";
     String fileName = null;
     byte[] img  = null;
+    static boolean checkconn = false;
     public static Connection getConnection(String dbURL, String userName, 
             String password) {
         Connection conn = null;
@@ -34,8 +35,13 @@ public class Bai1 extends javax.swing.JFrame {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             conn = DriverManager.getConnection(dbURL, userName, password);
             System.out.println("connect successfully!");
+            checkconn = true;
         } catch (Exception ex) {
             System.out.println("connect failure!");
+           checkconn = false;
+             String err = ex.getMessage();
+            if(err.equalsIgnoreCase("") == false)
+                JOptionPane.showMessageDialog(null, ex.getMessage());
             ex.printStackTrace();
         }
         return conn;
@@ -58,17 +64,17 @@ public class Bai1 extends javax.swing.JFrame {
         //hien thi ds hs
         // show();
         
-        ArrayList<HocSinh> list = createList();
-        DefaultTableModel model = (DefaultTableModel)table1.getModel();
-        Object[] row = new Object[4];
-        for (int i = 0; i < list.size(); i++) {
-            row[0] = list.get(i).getMaHS();
-            row[1] = list.get(i).getTenHS();
-            row[2] = list.get(i).getNgaySinh();
-            row[3] = list.get(i).getGhiChu();
-            
-            model.addRow(row);
-        }
+//        ArrayList<HocSinh> list = createList();
+//        DefaultTableModel model = (DefaultTableModel)table1.getModel();
+//        Object[] row = new Object[4];
+//        for (int i = 0; i < list.size(); i++) {
+//            row[0] = list.get(i).getMaHS();
+//            row[1] = list.get(i).getTenHS();
+//            row[2] = list.get(i).getNgaySinh();
+//            row[3] = list.get(i).getGhiChu();
+//            
+//            model.addRow(row);
+//        }
     }
 
     /**
@@ -82,6 +88,13 @@ public class Bai1 extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        url = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        uname = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        pass = new javax.swing.JTextField();
+        Connect = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtMaHs = new javax.swing.JTextField();
@@ -115,27 +128,77 @@ public class Bai1 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Quản lý học sinh"));
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 204, 255));
         jLabel1.setText("QUẢN LÝ HỌC SINH");
 
+        jLabel11.setText("URL");
+
+        url.setText("jdbc:sqlserver://localhost:1433;databaseName=QLSV1;");
+        url.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                urlActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("USERNAME");
+
+        uname.setText("sa");
+        uname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                unameActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setText("PASSWORD");
+
+        pass.setText("1234");
+
+        Connect.setText("Connect to SQL");
+        Connect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConnectActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(349, 349, 349)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel11)
+                .addGap(18, 18, 18)
+                .addComponent(url)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(uname, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Connect))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel11)
+                    .addComponent(url, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12)
+                    .addComponent(uname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13)
+                    .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Connect))
                 .addContainerGap())
         );
 
@@ -154,7 +217,6 @@ public class Bai1 extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txtPane);
 
         btnThem.setBackground(new java.awt.Color(102, 255, 153));
-        btnThem.setIcon(new javax.swing.ImageIcon("E:\\programer\\JAVA\\Code java\\JAVA\\JBDC_SQL\\Icon\\add-1-icon.png")); // NOI18N
         btnThem.setText("Thêm");
         btnThem.setActionCommand("");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
@@ -164,7 +226,6 @@ public class Bai1 extends javax.swing.JFrame {
         });
 
         btnXoa.setBackground(new java.awt.Color(51, 255, 153));
-        btnXoa.setIcon(new javax.swing.ImageIcon("E:\\programer\\JAVA\\Code java\\JAVA\\JBDC_SQL\\Icon\\Close-icon.png")); // NOI18N
         btnXoa.setText("Xóa");
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,7 +234,6 @@ public class Bai1 extends javax.swing.JFrame {
         });
 
         btnSua.setBackground(new java.awt.Color(102, 255, 103));
-        btnSua.setIcon(new javax.swing.ImageIcon("E:\\programer\\JAVA\\Code java\\JAVA\\JBDC_SQL\\Icon\\edit-icon.png")); // NOI18N
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -201,11 +261,11 @@ public class Bai1 extends javax.swing.JFrame {
                             .addComponent(txtTenHS)
                             .addComponent(txtNgaySinh)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnXoa)
+                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -230,7 +290,7 @@ public class Bai1 extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnThem)
+                    .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41))
@@ -268,7 +328,6 @@ public class Bai1 extends javax.swing.JFrame {
         lbl_img.setForeground(new java.awt.Color(153, 255, 255));
 
         btnChoose.setBackground(new java.awt.Color(51, 255, 153));
-        btnChoose.setIcon(new javax.swing.ImageIcon("E:\\programer\\JAVA\\Code java\\JAVA\\JBDC_SQL\\Icon\\choose.png")); // NOI18N
         btnChoose.setText("Choose");
         btnChoose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -402,7 +461,7 @@ public class Bai1 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -428,6 +487,9 @@ public class Bai1 extends javax.swing.JFrame {
             // close connection
             conn.close();
         } catch (Exception ex) {
+            String err = ex.getMessage();
+            if(err.equalsIgnoreCase("") == false)
+                JOptionPane.showMessageDialog(null, ex.getMessage());
             ex.printStackTrace();
         }
         return arr;
@@ -765,6 +827,40 @@ public class Bai1 extends javax.swing.JFrame {
             txtSearchGhiChu.setText("");
         }
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void unameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_unameActionPerformed
+
+    private void ConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConnectActionPerformed
+        DB_URL = url.getText() + "integratedSecurity=true";
+        USER_NAME = uname.getText();
+        PASSWORD = pass.getText();
+            //hien thi ds hs
+        // show();
+        
+        ArrayList<HocSinh> list = createList();
+        if(checkconn == true){
+             JOptionPane.showMessageDialog(null, "Connect successfully, your connection link ís: " + DB_URL + " username is: " + USER_NAME + " password is: "+ PASSWORD);
+        }else
+        {
+            JOptionPane.showMessageDialog(null, "Connect failed, your connection link ís: " + DB_URL + " username is: " + USER_NAME + " passwword is: "+ PASSWORD);
+        }
+        DefaultTableModel model = (DefaultTableModel)table1.getModel();
+        Object[] row = new Object[4];
+        for (int i = 0; i < list.size(); i++) {
+            row[0] = list.get(i).getMaHS();
+            row[1] = list.get(i).getTenHS();
+            row[2] = list.get(i).getNgaySinh();
+            row[3] = list.get(i).getGhiChu();
+            
+            model.addRow(row);
+        }
+    }//GEN-LAST:event_ConnectActionPerformed
+
+    private void urlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_urlActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_urlActionPerformed
     
     /**
      * @param args the command line arguments
@@ -800,30 +896,31 @@ public class Bai1 extends javax.swing.JFrame {
             }
         });
         
-        try {
-            // connnect to database 'testdb'
-            Connection conn = getConnection(DB_URL, USER_NAME, PASSWORD);
-            // crate statement
-            Statement stmt = conn.createStatement();
-            // get data from table 'student'
-            ResultSet rs = stmt.executeQuery("select * from HocSinh");
-            // show data
-            while (rs.next()) {
-                System.out.println(rs.getInt(1) + "  " + rs.getString(2) 
-                        + "  " + rs.getString(3)) ;
-            }
-            
-            
-            // close connection
-            conn.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+//        try {
+//            // connnect to database 'testdb'
+//            Connection conn = getConnection(DB_URL, USER_NAME, PASSWORD);
+//            // crate statement
+//            Statement stmt = conn.createStatement();
+//            // get data from table 'student'
+//            ResultSet rs = stmt.executeQuery("select * from HocSinh");
+//            // show data
+//            while (rs.next()) {
+//                System.out.println(rs.getInt(1) + "  " + rs.getString(2) 
+//                        + "  " + rs.getString(3)) ;
+//            }
+//            
+//            
+//            // close connection
+//            conn.close();
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
     }
     
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Connect;
     private javax.swing.JButton btnChoose;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSua;
@@ -831,6 +928,9 @@ public class Bai1 extends javax.swing.JFrame {
     private javax.swing.JButton btnXoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -847,6 +947,7 @@ public class Bai1 extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lbl_img;
+    private javax.swing.JTextField pass;
     private javax.swing.JTable table1;
     private javax.swing.JTextField txtMaHs;
     private javax.swing.JTextField txtNgaySinh;
@@ -856,5 +957,7 @@ public class Bai1 extends javax.swing.JFrame {
     private javax.swing.JTextField txtSearchNgaySinh;
     private javax.swing.JTextField txtSearchTenHS;
     private javax.swing.JTextField txtTenHS;
+    private javax.swing.JTextField uname;
+    private javax.swing.JTextField url;
     // End of variables declaration//GEN-END:variables
 }

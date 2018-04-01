@@ -9,7 +9,7 @@ NgaySinh datetime,
 GhiChu nvarchar(100), 
 ExtInfo image
 )
-select * from HocSinh where MaHS = 2 and GhiChu = N'khá' and NgaySinh = '2018-03-19'
+--select * from HocSinh where MaHS = 2 and GhiChu = N'khá' and NgaySinh = '2018-03-19'
 --insert into HocSinh values (
 -- N'Nguyễn Văn Nam', '02/15/1997', N'Học sinh giỏi', null
 --)
@@ -25,3 +25,4 @@ select * from HocSinh where MaHS = 2 and GhiChu = N'khá' and NgaySinh = '2018-0
 --insert into HocSinh values (
 --'4', N'Nguyễn Văn Chinh', '02/11/1997', 'Học sinh khá'
 --)
+select * from HocSinh 

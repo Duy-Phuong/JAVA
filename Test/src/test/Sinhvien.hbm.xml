@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 31, 2018 9:11:42 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="test.Sinhvien" table="sinhvien" catalog="hibernatedemo2" optimistic-lock="version">
+        <id name="maSinhVien" type="string">
+            <column name="MaSinhVien" length="7" />
+            <generator class="assigned" />
+        </id>
+        <property name="hoVaTen" type="string">
+            <column name="HoVaTen" length="45" />
+        </property>
+        <property name="ngaySinh" type="date">
+            <column name="NgaySinh" length="10" />
+        </property>
+        <property name="diaChi" type="string">
+            <column name="DiaChi" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>
