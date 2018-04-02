@@ -60,7 +60,7 @@ public class HibernateDelete {
       }
 
       /* Update employee's records */
-      HE.updateEmployee(2, 95000);
+     // HE.updateEmployee(2, 95000);
 
       /* Delete an employee from the database */
      // HE.deleteEmployee(67);

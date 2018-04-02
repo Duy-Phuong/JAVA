@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 2, 2018 9:51:35 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="hbn3" name="pojo.DanhMuc" optimistic-lock="version" table="danhmuc">
+    <id name="maDanhMuc" type="string">
+      <column length="45" name="MaDanhMuc"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="tenDanhMuc" type="string">
+      <column length="45" name="TenDanhMuc"/>
+    </property>
+    
+    <set inverse="true" name="sachs" fetch="join" lazy="false">
+      <key>
+        <column length="45" name="MaDanhMuc" not-null="true"/>
+      </key>
+      <one-to-many class="pojo.Sach"/>
+    </set>
+  </class>
+</hibernate-mapping>

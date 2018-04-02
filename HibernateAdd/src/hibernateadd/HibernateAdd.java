@@ -56,10 +56,10 @@ public class HibernateAdd {
       }
 
       /* Update employee's records */
-      //HE.updateEmployee(65, 95000);
+      HE.updateEmployee(6, 95000);
 
       /* Delete an employee from the database */
-     // HE.deleteEmployee(67);
+      //HE.deleteEmployee(5);
 
       HE.listEmployees(); 
       
@@ -107,7 +107,7 @@ public class HibernateAdd {
       try{
          tx = session.beginTransaction();
   
-        List employees = session.createQuery("FROM Employee").list();
+        List employees = session.createQuery("FROM Employee").list(); //trả về 1 đối tượng query 
          for (Iterator iterator1 = 
                            employees.iterator(); iterator1.hasNext();){
             Employee employee = (Employee) iterator1.next(); 
@@ -115,8 +115,7 @@ public class HibernateAdd {
             System.out.print("  Last Name: " + employee.getLastName()); 
             System.out.println("  Salary: " + employee.getSalary()); 
             Set phoneNums = employee.getPhones();
-            for (Iterator iterator2 = 
-                         phoneNums.iterator(); iterator2.hasNext();){
+            for (Iterator iterator2 = phoneNums.iterator(); iterator2.hasNext();){
                   Phone phoneNum = (Phone) iterator2.next(); 
                   System.out.println("Phone: " + phoneNum.getPhoneNumber()); 
             }

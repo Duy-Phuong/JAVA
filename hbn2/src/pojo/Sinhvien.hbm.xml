@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 2, 2018 8:35:50 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="hbn2" name="pojo.SinhVien" optimistic-lock="version" table="sinhvien">
+    <id name="maSinhVien" type="string">
+      <column length="45" name="MaSinhVien"/>
+      <generator class="assigned"/>
+    </id>
+<!--    <property name="soCmnd" type="string">
+      <column length="45" name="SoCMND"/>
+    </property>-->
+    <many-to-one class="pojo.Cmnd"
+        name="soCmnd" fetch="join" lazy="false"
+        cascade="save-update,delete">
+        <column length="45" name="SoCMND" unique="true"/>
+    </many-to-one>
+  </class>
+</hibernate-mapping>
