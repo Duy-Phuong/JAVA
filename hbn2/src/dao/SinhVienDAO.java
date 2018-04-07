@@ -18,8 +18,7 @@ import util.HibernateUtil;
 public class SinhVienDAO {
     public static List<SinhVien> layDanhSachSinhVien() {
     List<SinhVien> ds = null;
-    Session session = HibernateUtil.getSessionFactory()
-    .openSession();
+    Session session = HibernateUtil.getSessionFactory().openSession();
     try {
     String hql = "select sv from SinhVien sv";
     Query query = session.createQuery(hql);

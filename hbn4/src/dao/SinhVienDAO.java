@@ -36,7 +36,7 @@ public class SinhVienDAO {
         .openSession();
         try {
         String hql= " select sv ";
-        hql +="from SinhVien sv left join fetch sv.khoahocs";
+        hql +="from sinhvien sv left join fetch sv.khoahocs";
         hql += " where sv.maSinhVien=:maSinhVien";
         Query query = session.createQuery(hql);
         query.setString("maSinhVien", maSinhVien);

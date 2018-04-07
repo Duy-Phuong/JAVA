@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 4, 2018 9:25:36 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="hibernateweek5" name="pojo.SinhVien" optimistic-lock="version" table="sinhvien">
+    <id name="maSinhVien" type="string">
+      <column length="45" name="MaSinhVien"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="hoTen" type="string">
+      <column length="45" name="HoTen"/>
+    </property>
+<!--    <property name="idsvaccount" type="string">
+      <column length="45" name="idsvaccount"/>
+    </property>-->
+    <many-to-one class="pojo.SvAccount"
+        name="idsvaccount" fetch="join" lazy="false"
+        cascade="save-update,delete">
+        <column length="45" name="idsvaccount" unique="true"/>
+    </many-to-one>
+  </class>
+</hibernate-mapping>

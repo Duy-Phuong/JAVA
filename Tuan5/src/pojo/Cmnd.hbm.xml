@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 3, 2018 7:08:59 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojo.Cmnd" table="cmnd" catalog="hbn2" optimistic-lock="version">
+        <id name="soCmnd" type="string">
+            <column name="SoCMND" length="45" />
+            <generator class="assigned" />
+        </id>
+        <property name="hoTen" type="string">
+            <column name="HoTen" length="45" />
+        </property>
+        <property name="ngaySinh" type="date">
+            <column name="NgaySinh" length="10" />
+        </property>
+        
+        <one-to-one name="sinhVien" class="pojo.SinhVien"
+        property-ref="soCmnd"
+        cascade="save-update,delete"/>
+    </class>
+</hibernate-mapping>
+

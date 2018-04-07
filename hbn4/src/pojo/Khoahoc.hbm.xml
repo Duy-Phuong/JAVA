@@ -11,7 +11,7 @@
       <column length="45" name="TenKhoaHoc"/>
     </property>
     
-    <set inverse="true" name="sinhviens"
+    <set inverse="true" name="sinhviens" fetch="join" lazy="false" cascade="save-update, delete"
             table="khoahoc_sinhvien">
             <key>
             <column length="45" name="MaKhoaHoc" not-null="true"/>

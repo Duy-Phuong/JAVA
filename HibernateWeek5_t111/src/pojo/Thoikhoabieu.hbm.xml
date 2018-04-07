@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 5, 2018 8:19:10 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojo.ThoiKhoaBieu" table="thoikhoabieu" catalog="hibernateweek5">
+        <id name="maTkb" type="string">
+            <column name="MaTKB" length="45" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="ngayBatDau" type="date">
+            <column name="NgayBatDau" length="10" />
+        </property>
+        <property name="ngayKetThuc" type="date">
+            <column name="NgayKetThuc" length="10" />
+        </property>
+        <property name="khoangThoiGian" type="java.lang.Integer">
+            <column name="KhoangThoiGian" />
+        </property>
+        <property name="thu" type="java.lang.Integer">
+            <column name="Thu" />
+        </property>
+        <property name="gioBatDau" type="time">
+            <column name="GioBatDau" length="10" />
+        </property>
+        <property name="gioKetThuc" type="time">
+            <column name="GioKetTHuc" length="10" />
+        </property>
+        <property name="tenPhongHoc" type="string">
+            <column name="TenPhongHoc" length="45" />
+        </property>
+        <one-to-one name="monHoc" class="pojo.MonHoc" property-ref="thoiKhoaBieu" cascade="save-update,delete"></one-to-one>
+    </class>
+</hibernate-mapping>

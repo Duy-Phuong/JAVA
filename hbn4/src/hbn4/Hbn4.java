@@ -5,6 +5,7 @@
  */
 package hbn4;
 
+import dao.KhoaHocDAO;
 import dao.SinhVienDAO;
 import java.util.Iterator;
 import org.hibernate.HibernateException;
@@ -23,7 +24,7 @@ public class Hbn4 {
 
     public static void main(String[] args) {
         System.out.println("SV 3: ");
-       SinhVien sv=SinhVienDAO.layThongTinSinhVien("3");
+        SinhVien sv=SinhVienDAO.layThongTinSinhVien("3");
         System.out.println(sv.getMaSinhVien());
         System.out.println(sv.getTenSinhVien());
         System.out.println(sv.getEmail());
@@ -54,7 +55,17 @@ public class Hbn4 {
             else{
                 System.out.println("Thêm thất bại");
             }
-        
+         System.out.println("KH 1: ");
+        KhoaHoc s2 =KhoaHocDAO.layThongTinKhoaHoc("1");
+        System.out.println(s2.getMaKhoaHoc());
+        System.out.println(s2.getTenKhoaHoc());
+        Iterator<SinhVien> sinhviens = s2.getSinhviens().iterator();
+        while(sinhviens.hasNext()){
+            System.out.println("SV: ");
+            SinhVien kh2 = sinhviens.next();
+            System.out.print(kh2.getTenSinhVien()+ " -- ");
+            System.out.println(kh2.getMaSinhVien());
+        }
         System.exit(1);
     }
     

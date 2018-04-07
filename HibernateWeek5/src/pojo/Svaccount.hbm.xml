@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 4, 2018 9:25:36 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="hibernateweek5" name="pojo.SvAccount" optimistic-lock="version" table="svaccount">
+    <id name="idsvaccount" type="string">
+      <column length="45" name="idsvaccount"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="username" type="string">
+      <column length="45" name="username"/>
+    </property>
+    <property name="password" type="string">
+      <column length="45" name="password"/>
+    </property>
+     <one-to-one name="sinhVien" class="pojo.SinhVien"
+        property-ref="idsvaccount"
+        cascade="save-update,delete"/>
+  </class>
+</hibernate-mapping>

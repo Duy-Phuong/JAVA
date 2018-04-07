@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 4, 2018 9:25:36 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="hibernateweek5" name="pojo.MonHoc" optimistic-lock="version" table="monhoc">
+    <id name="maMonHoc" type="string">
+      <column length="45" name="MaMonHoc"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="tenMonHoc" type="string">
+      <column length="100" name="TenMonHoc"/>
+    </property>
+<!--    <property name="thoiKhoaBieu" type="string">
+      <column length="45" name="ThoiKhoaBieu"/>
+    </property>-->
+        <many-to-one class="pojo.ThoiKhoaBieu"
+        name="thoiKhoaBieu" fetch="join" lazy="false"
+        cascade="save-update,delete">
+        <column length="45" name="ThoiKhoaBieu" unique="true"/>
+    </many-to-one>
+    <property name="maSinhVien" type="string">
+      <column length="65535" name="MaSinhVien"/>
+    </property>
+  </class>
+</hibernate-mapping>
