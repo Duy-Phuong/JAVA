@@ -129,30 +129,49 @@ public class FormLogin extends javax.swing.JFrame {
 //            System.out.println("Sv số 2 pass: " + v.getIdsvaccount().getPassword());
 //            //Cmnd c = v.getSoCmnd();
 //        }
-
-       StringBuffer bu = new StringBuffer(username.getText());
-       String giaovu = bu.delete(0, 2).toString(); // lay dk mã gv
-       GiaoVu g1 = null;
-        g1 = GiaoVuDAO.layThongTinGiaoVu(giaovu);
+        
        
+       GiaoVu g1 = null;
+        if(username.getText().startsWith("gv") == true ){
+            StringBuffer bu = new StringBuffer(username.getText());
+            String giaovu = bu.delete(0, 2).toString(); // lay dk mã gv
+            g1 = GiaoVuDAO.layThongTinGiaoVu(giaovu);
+        }
 // doi với gv thi ten là gv + mã gv
-        if(g1 != null || v!= null){
+
+//        if(g1 != null || v!= null){
+        if(g1 != null){
             if(username.getText().startsWith("gv") == true ){
                
                 if(g1 != null && g1.getIdgvaccount().getPassword().equals(pass.getText()) && g1.getIdgvaccount().getUsername().equals(username.getText()) ){
                 FormGiaoVu g = new FormGiaoVu();
                 g.setVisible(true);
+                    setVisible(false);
+                }else{
+                  JOptionPane.showMessageDialog(null, "Mật khẩu và tên đăng nhập sai mời bạn nhập lại!");
+                   
                 }
             }
-            
-            //neu la sv
-            if(v != null && v.getIdsvaccount().getPassword().equals(pass.getText()) && v.getIdsvaccount().getUsername().equals(username.getText()) ){
-                FormSinhVien g = new FormSinhVien();
-                g.setVisible(true);
-            }
-        }else{
-            JOptionPane.showMessageDialog(null, "Mật khẩu và tên đăng nhập sai mời bạn nhập lại");
         }
+            //neu la sv
+           if(v != null){
+            if(v != null && v.getIdsvaccount().getPassword().equals(pass.getText()) && v.getIdsvaccount().getUsername().equals(username.getText()) ){
+                FormSinhVien1 g = new FormSinhVien1();
+                g.setVisible(true);
+                 setVisible(false);
+            }else{
+               JOptionPane.showMessageDialog(null, "Mật khẩu và tên đăng nhập sai mời bạn nhập lại!");
+            }
+           }
+           
+           if(g1 == null && v == null){
+               JOptionPane.showMessageDialog(null, "Mật khẩu và tên đăng nhập sai mời bạn nhập lại!");
+           }
+//        }else{
+//            if(kt9 == false){
+//                JOptionPane.showMessageDialog(null, "Mật khẩu và tên đăng nhập sai mời bạn nhập lại!");
+//            }
+//        }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

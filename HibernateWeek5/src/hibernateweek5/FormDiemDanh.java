@@ -43,6 +43,8 @@ public class FormDiemDanh extends JPanel implements TableModelListener,ActionLis
     static FormDiemDanh newContentPane;
      int[] num = {0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
     boolean[] avaliable = {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
+   
+    
     public FormDiemDanh() {
          super(new GridLayout(1,0)); //khi kéo nó k bị giãn
          add.addActionListener(this);    
@@ -62,7 +64,7 @@ public class FormDiemDanh extends JPanel implements TableModelListener,ActionLis
                  System.out.println("empty");
             }else{
                 //neu mon hoc co sinh vien roi
-                listSv =  v.getMaSinhVien();
+                listSv =  v.getMaSinhVien();//lay ra ds sv dk mon do
                 //System.out.println("list: " + listSv);
                  listSvUpdate = listSv; // khoi tao cho no nhung sv co roi    
 
@@ -442,7 +444,7 @@ public class FormDiemDanh extends JPanel implements TableModelListener,ActionLis
                                 System.out.println("========diem danh add=======");
                                  System.out.println("Mã: " + sv3.getMaSinhVien());
                                 System.out.println("Tuần: " + sv3.getTuan());
-                                 sv3.setTuan(tuan);
+                                 sv3.setTuan(tuan.trim());
 //                                 MonHoc c3 = sv3.getMaMonHoc();
 //                                 System.out.println("tên môn: " + c3.getTenMonHoc());
                                 boolean kq1 = DiemDanhDAO.updateDiemDanh(sv3);

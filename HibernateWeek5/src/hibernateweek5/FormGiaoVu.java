@@ -58,7 +58,25 @@ public class FormGiaoVu extends javax.swing.JFrame {
 //            }
 //            ngaykt.setText(thang + "/" + s[1] + "/" + s[2]);
 
-            
+            //tính chính xác ngày sau 15 tuần
+        long  thoiGianMotTuan = 0L;
+        long  thoiGian15Tuan = 0L;
+         formatter = new SimpleDateFormat("MM/dd/yyyy");
+        try {
+            Date date1 = formatter.parse("04/01/2018");
+            System.out.println("Date1: " + date1);
+            Date date2 = formatter.parse("04/08/2018");
+            System.out.println("Date2: " + date2);
+            thoiGianMotTuan = date2.getTime() - date1.getTime();
+            thoiGian15Tuan = thoiGianMotTuan*15;
+             Date date3 = new Date(date1.getTime() + thoiGian15Tuan);
+              
+            String strDate3 = formatter.format(date3);
+            System.out.println("Date Format with MM/dd/yyyy after 15 week: " + strDate3);
+            ngaykt.setText(strDate3);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
             ///***********************************************
         formatter = new SimpleDateFormat("hh:mm");
@@ -133,8 +151,12 @@ public class FormGiaoVu extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         CSV = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Giáo Vụ");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Thời khóa biểu"));
 
@@ -365,11 +387,34 @@ public class FormGiaoVu extends javax.swing.JFrame {
                    e.printStackTrace();
                }   
                    formatter = new SimpleDateFormat("MM/dd/yyyy");//"MM-dd-yyyy hh:mm"
-
+                    String ngayKetThuc = "01/01/2000"; 
                 try {
                    ngayBd = formatter.parse(ngaybd.getText());
                    System.out.println("ngay bat dau: " + gioBd);
-                    ngayKt = formatter.parse(ngaykt.getText());
+                   // nếu người dùng nhập 1 ngày mới thì tính lại ngày kt cx
+                   //phai de trong ngay kt
+                   if(ngaykt.getText().equals("") == true){
+                        long  thoiGianMotTuan = 0L;
+                        long  thoiGian15Tuan = 0L;
+                         formatter = new SimpleDateFormat("MM/dd/yyyy");
+                        try {
+                            Date date1 = formatter.parse("04/01/2018");
+                            System.out.println("Date1: " + date1);
+                            Date date2 = formatter.parse("04/08/2018");
+                            System.out.println("Date2: " + date2);
+                            thoiGianMotTuan = date2.getTime() - date1.getTime();
+                            thoiGian15Tuan = thoiGianMotTuan*15;
+                             Date date3 = new Date(ngayBd.getTime() + thoiGian15Tuan);
+
+                            ngayKetThuc = formatter.format(date3);
+                            System.out.println("Date Format with MM/dd/yyyy after 15 week: " + ngayKetThuc);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                   }
+                   //
+                  //  ngayKt = formatter.parse(ngaykt.getText()); //k can
+                   ngayKt = formatter.parse(ngayKetThuc);
                    System.out.println("ngay ket thuc: " + gioKt);
                } catch (ParseException e) {
                    e.printStackTrace();
@@ -410,6 +455,11 @@ public class FormGiaoVu extends javax.swing.JFrame {
         FormDiemDanh.main(a);
        
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+       
+
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

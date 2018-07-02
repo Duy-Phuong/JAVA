@@ -202,7 +202,7 @@ public class FormAddSinhVien extends javax.swing.JFrame {
             else{
                 String mess = "";
                 if(v == null){
-                   mess = mess + "Môn học không tại! Mời bạn nhập lại thông tin";
+                   mess = mess + "Môn học không tồn tại!";
                 }else{
                     //neu có môn hoc mà thêm sv thất bại có nghĩa là mssv đã tồn tại
                     if(kq1 == false){

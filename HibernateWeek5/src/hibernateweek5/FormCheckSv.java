@@ -274,7 +274,7 @@ public class FormCheckSv extends JPanel implements TableModelListener,ActionList
          if(ev.getSource()==add){
              //thêm và sửa mon hoc
 
-            v2.setMaSinhVien(listSvUpdate);
+            v2.setMaSinhVien(listSvUpdate.trim());
             boolean kq1 = false;
             if(v2.getMaSinhVien()!=null || v2.getMaSinhVien().equals("") != true){
                 kq1 = MonHocDAO.updateMonHoc(v2);
@@ -299,12 +299,40 @@ public class FormCheckSv extends JPanel implements TableModelListener,ActionList
                 j.setText(tenMon);
                 j.setForeground(Color.green);
          
-                if(v2.getMaSinhVien() == null || v2.getMaSinhVien().equals("")==true){
-                     System.out.println("empty");
-                }else{
+//                if(v2.getMaSinhVien() == null || v2.getMaSinhVien().equals("")==true){
+//                     System.out.println("empty");
+//                    if(ds != null){
+//                       
+//                        MyTableModel model3 = new MyTableModel();
+//                        for(int i=0; i<ds.size(); i++){
+//                        SinhVien sv3=ds.get(i);
+//                        //them sv vao table
+//                          model3.insertRow(new SinhVienStatus(sv3.getMaSinhVien(), sv3.getHoTen(), listSvUpdate.contains(sv3.getMaSinhVien())));
+//
+//                          System.out.println("========info=======");
+//                            System.out.println("Mã SV: " + sv3.getMaSinhVien() + " boolean: " + listSvUpdate.contains(sv3.getMaSinhVien()));
+//                            SvAccount c = sv3.getIdsvaccount();
+//                        }
+//                        table = new JTable(model3);
+//                         table.setPreferredScrollableViewportSize(new Dimension(500, 150));
+//                        table.setFillsViewportHeight(true);
+//                        table.getModel().addTableModelListener(this);
+//                        //Create the scroll pane and add the table to it.
+//                       remove(scrollPane);
+//                        scrollPane = new JScrollPane(table);
+//
+//                        //Add the scroll pane to this panel.
+//                        add(scrollPane);
+//                       }else{
+//                           System.out.println("error");
+//                       }
+//                }else{
                     //neu mon hoc co sinh vien roi
                     listSvUpdate =  v2.getMaSinhVien();
                     System.out.println(" ++=============++ list change: " + listSvUpdate);
+                    if(listSvUpdate == null){
+                        listSvUpdate = "";
+                    }
                         
                     if(ds != null){
                        
@@ -331,7 +359,7 @@ public class FormCheckSv extends JPanel implements TableModelListener,ActionList
                        }else{
                            System.out.println("error");
                        }
-                }
+             //   }
 //        
 //                 //Create and set up the content pane.
 //                 FormCheckSv newContentPane1 = new FormCheckSv();

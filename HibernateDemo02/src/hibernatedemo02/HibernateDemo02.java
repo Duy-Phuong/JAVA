@@ -80,12 +80,12 @@ public class HibernateDemo02 {
 //            }
 //                
                         //<editor-fold defaultstate="collapsed" desc="5. Xóa sinh viên">
-            boolean kq = SinhVienDAO.xoaSinhVien("5");
-            if (kq == true) {
-            System.out.println("Xóa thành công");
-            } else {
-            System.out.println("Xóa thất bại");
-            }
+//            boolean kq = SinhVienDAO.xoaSinhVien("5");
+//            if (kq == true) {
+//            System.out.println("Xóa thành công");
+//            } else {
+//            System.out.println("Xóa thất bại");
+//            }
             
             //in
               List<SinhVien> ds1 = SinhVienDAO.layDanhSachSinhVien();

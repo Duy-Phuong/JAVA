@@ -70,27 +70,27 @@ public class DiemDanhDAO {
         return sv;
     }
     
-    public static boolean themDiemDanh(DiemDanh sv) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        if (DiemDanhDAO.layThongTinDiemDanh(sv.getId()) != null) {
-        return false;
-        }
-        boolean kq = true;
-        Transaction transaction = null;
-        try {
-        transaction = session.beginTransaction();
-        session.save(sv);
-        transaction.commit();
-        } catch (HibernateException ex) {
-        transaction.rollback();
-        System.err.println(ex);
-        kq = false;
-        } finally {
-        session.close();
-        }
-        return kq;
-        }
-     //them bằng cách tự tăng id
+//    public static boolean themDiemDanh(DiemDanh sv) {
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+//        if (DiemDanhDAO.layThongTinDiemDanh(sv.getId()) != null) {
+//        return false;
+//        }
+//        boolean kq = true;
+//        Transaction transaction = null;
+//        try {
+//        transaction = session.beginTransaction();
+//        session.save(sv);
+//        transaction.commit();
+//        } catch (HibernateException ex) {
+//        transaction.rollback();
+//        System.err.println(ex);
+//        kq = false;
+//        } finally {
+//        session.close();
+//        }
+//        return kq;
+//        }
+     //them bằng cách tự tăng id cách trên k hiệu quả vs bằng id tự tăng
      public static DiemDanh addDiemDanh(String maSinhVien, MonHoc maMonHoc, String tuan) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;

@@ -259,12 +259,19 @@ public class HibernateWeek5 {
         
         //tính toán 1 tuần
         long  thoiGianMotTuan = 0L;
+        long  thoiGian15Tuan = 0L;
          formatter = new SimpleDateFormat("MM/dd/yyyy");
         try {
             Date date1 = formatter.parse("04/01/2018");
             System.out.println("Date1: " + date1);
             Date date2 = formatter.parse("04/08/2018");
             System.out.println("Date2: " + date2);
+            thoiGianMotTuan = date2.getTime() - date1.getTime();
+            thoiGian15Tuan = thoiGianMotTuan*15;
+             Date date3 = new Date(date1.getTime() + thoiGian15Tuan);
+              
+            String strDate3 = formatter.format(date3);
+            System.out.println("Date Format with MM/dd/yyyy after 15 week: " + strDate3);
         } catch (ParseException e) {
             e.printStackTrace();
         }
